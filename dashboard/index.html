@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar v3 — which pre-token protocol is worth farming next</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <div class="brand-mark" aria-hidden="true"></div>
+    <div>
+      <h1>TOKEN RADAR <span class="v3">v3</span></h1>
+      <p class="tag">Pre-token protocols, ranked by expected launch value — fitted from the snapshot, not a list of names.</p>
+    </div>
+  </div>
+  <div class="asof" id="asof">Snapshot: —</div>
+</header>
+
+<section class="stats" id="stats" aria-label="Board summary"></section>
+
+<section class="controls" aria-label="Filters">
+  <input id="q" type="search" placeholder="Search name, slug, category…" autocomplete="off">
+  <label>Verdict
+    <select id="f-verdict">
+      <option value="">All verdicts</option>
+      <option value="FARM">FARM</option>
+      <option value="THIN">THIN</option>
+      <option value="SKIP">SKIP</option>
+    </select>
+  </label>
+  <label>Category <select id="f-cat"><option value="">All categories</option></select></label>
+  <label>Chain <select id="f-chain"><option value="">All chains</option></select></label>
+  <label class="check"><input id="f-watch" type="checkbox"> Watchlist only</label>
+  <label>Sort
+    <select id="f-sort">
+      <option value="expected">Expected value ↓</option>
+      <option value="odds">Listing odds ↓</option>
+      <option value="implied">Implied value ↓</option>
+      <option value="tvl">TVL ↓</option>
+      <option value="nph">Net $/hour ↓</option>
+      <option value="name">Name A–Z</option>
+    </select>
+  </label>
+  <span class="count" id="count"></span>
+</section>
+
+<main>
+  <table id="board">
+    <thead>
+      <tr>
+        <th class="num">#</th>
+        <th>Protocol</th>
+        <th class="num">TVL</th>
+        <th class="num">Implied</th>
+        <th class="num">Odds</th>
+        <th class="num">Expected</th>
+        <th>Verdict</th>
+        <th class="num">Net $/h</th>
+      </tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+  <p class="hint">Click a row for the detail view: value breakdown, nearest traded comps, sensitivity matrix, and the farm plan with costs.</p>
+</main>
+
+<section class="detail" id="detail" hidden aria-label="Protocol detail"></section>
+
+<footer>
+  <p><strong>How to read this board.</strong> <em>Implied</em> is what the token would be worth at launch if the
+  protocol's record stayed as it is (size curve fitted on 128 traded comps). <em>Odds</em> is the fitted
+  probability a protocol with this TVL, age and category records a token. <em>Expected</em> = implied × odds × 10%
+  farmer share. The <em>verdict</em> prices a reference $1,000 / 12-week farm: FARM when it nets over $25 after gas,
+  THIN when it nets over $0, else SKIP. Big protocols rank high on expected value but dilute a small farmer — sort by
+  Net $/h to see the other side.</p>
+  <p class="fine">Implied values are this entry's own claim, never make.fun's. A protocol "records no token" in the
+  snapshot; that is DefiLlama's record, not proof it has none. Model, validation and assumptions:
+  <strong>0-research.md</strong> in this dashboard. No network: every number on this page comes from the sealed snapshot.</p>
+</footer>
+
+<script src="z-data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
